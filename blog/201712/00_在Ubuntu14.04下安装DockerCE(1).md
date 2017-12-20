@@ -1,4 +1,4 @@
-## 在Ubuntu14.04下安装Docker CE - repository篇
+## 在Ubuntu14.04下安装Docker CE(1) - repository篇
 
 从2017年3月开始，Docker开始分为社区版本和企业版，也就是Docker CE和Docker EE, 原来Ubuntu14.04下，通过`sudo apt-get install docker.io`来进行安装的方式已经过时了。在这里，会详细介绍如何在ubuntu14.04 LTS下安装Docker社区版，也就是Docker CE。
 
