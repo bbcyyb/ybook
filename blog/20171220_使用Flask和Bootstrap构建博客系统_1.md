@@ -20,7 +20,7 @@
 $ pip install virtualenv
 ```
 
-我采用virtualenvwrapper来管理虚拟环境，所以可以不用配置virtualenv。
+我采用virtualenvwrapper来管理虚拟环境，可以不用直接配置virtualenv。Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境。
 
 #### 安装virtualenvwrapper
 
@@ -56,3 +56,15 @@ source /usr/local/bin/virtualenvwrapper.sh
 - rmvirtualenv :删除虚拟环境
 - deactivate: 离开虚拟环境
 
+创建一个虚拟环境，取个名字，叫做missouri
+
+```shell
+$ mkvirtualenv missouri
+```
+
+切换到新建的虚拟环境
+```shell
+$ workon missouri
+```
+
+本节结束，下一节开始构建flask程序。
