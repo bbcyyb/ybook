@@ -1,6 +1,6 @@
-## 使用Flask和Bootstrap构建博客系统
+# 使用Flask和Bootstrap构建博客系统
 
-### 技术栈
+## 技术栈
 
 - macOS10.12.5
 - Python2.7.13
@@ -8,16 +8,16 @@
 - virtualenv
 - virtualenvwrapper
 
-#### 安装Python2.7.13
+### 安装Python2.7.13
 
-#### 下载Bootstrap4.0.0-beta.2
+### 下载Bootstrap4.0.0-beta.2
 
-#### 安装virtualenv
+### 安装virtualenv
 
 1. 用pip进行安装：
 
 ```shell
-$ pip install virtualenv
+pip install virtualenv
 ```
 
 我采用virtualenvwrapper来管理虚拟环境，可以不用直接配置virtualenv。Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境。
@@ -27,13 +27,13 @@ $ pip install virtualenv
 1. 用pip进行安装：
 
 ```shell
-$ pip install virtualenvwrapper
+pip install virtualenvwrapper
 ```
 
 2. 创建目录用来存放虚拟环境：
 
 ```shell
-$ mkdir ~/.virtualenvs
+mkdir ~/.virtualenvs
 ```
 
 3. 在.bashrc或是.zshrc中添加相关配置信息：
@@ -59,12 +59,12 @@ source /usr/local/bin/virtualenvwrapper.sh
 创建一个虚拟环境，取个名字，叫做missouri
 
 ```shell
-$ mkvirtualenv missouri
+mkvirtualenv missouri
 ```
 
 切换到新建的虚拟环境
 ```shell
-$ workon missouri
+workon missouri
 ```
 
 本节结束，下一节开始构建flask程序。
