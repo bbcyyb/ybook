@@ -1,0 +1,42 @@
+# minikube报x509证书错误的解决办法
+
+最近在搭建本地的minikube环境，首次启动minikube的时候，下载minikube ISO，会报`x509`证书签名不合法的问题。
+
+```shell
+$ minikube start
+
+Downloading Minikube ISO
+E0302 01:29:45.103189   19032 start.go:159] Error starting host: Error attempting to cache minikube ISO from URL: Error downloading Minikube ISO: failed to download: failed to download to temp file: download failed: 5 error(s) occurred:
+
+* Temporary download error: Get https://storage.googleapis.com/minikube/iso/minikube-v0.25.1.iso: x509: certificate signed by unknown authority 
+```
+
+调查后发现，可能是由于要使用公司内部私有git repository，所以把https证书换成了公司的证书。
+
+解决思路：把替换后的证书直接用openssl拉下来，然后加入到系统（我是Ubuntu）系统证书中，然后使用update-ca-certificates更新，最后重启docker服务，成功！！
+
+## 方式1：
+
+```shell
+$ echo -n | openssl s_client -showcerts -connect storage.googleapis.com:443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > /usr/local/share/ca-certificates/googleapis.crt
+$ update-ca-certificates
+```
+
+## 方式2：
+
+```shell
+$ echo -n | openssl s_client -showcerts -connect storage.googleapis.com:443 2>/dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' >> /etc/ssl/certs/ca-certificates.crt
+
+$ update-ca-certificates
+Updating certificates in /etc/ssl/certs... 1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d....
+Adding debian:cloudfront.pem
+done.
+done.
+```
+
+## 结语：
+
+上面的方式之所以可以搞定大多数由于公司IT部门替换https证书造成的错误，是因为很多程序是使用系统默认的证书（路径）。
+
+对于一些特殊的程序，比如python pip,不使用系统默认的证书，而是使用自己的路径，可以强制它使用**方式2**生成的证书。
